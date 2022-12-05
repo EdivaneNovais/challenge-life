@@ -3,15 +3,19 @@ import uvicorn
 from commons.base_repository import BaseRepository
 from config.database import get_db
 
+from config.routes import setup_routes
+
 app = FastAPI()
+setup_routes(app)
 
 @app.get("/")
 def roo() -> str:
     return"Welcome"
 
-# @app.get('/api/v1/users')
-# def get_usuarios():
-#     return {"info": "todos os usuarios"}
+
+#@app.get('/api/v1/users')
+#def get_usuarios():
+#return {"info": "todos os usuarios"}
 
 # @app.get('/api/v1/users{id}')
 # def get_usuario(id:int):

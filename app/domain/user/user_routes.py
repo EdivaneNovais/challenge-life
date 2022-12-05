@@ -11,6 +11,7 @@ from domain.user.user_schema import UserSchema, UserSchemaCreate
 
 router = APIRouter()
 
+
 @router.get("/api/v1/users",
             summary="Operação Responsavel por retornar todos os usuarios cadastrados.",
             response_model=List[UserSchema])
