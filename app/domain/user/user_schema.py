@@ -5,9 +5,9 @@ from pydantic import BaseModel, Field
 
 class UserSchema(BaseModel):
     id: int
-    active: bool
+    active: Optional[bool]
     age: int
-    name: str=Field
+    name: str=Field(..., example="Maria")
     gender: str
     email: str
 
@@ -15,7 +15,6 @@ class UserSchema(BaseModel):
         orm_mode = True
 
 class UserSchemaCreate(BaseModel):
-    active: bool
     age: int
     name: str=Field
     gender: str
