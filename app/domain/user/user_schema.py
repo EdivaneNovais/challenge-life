@@ -15,7 +15,10 @@ class UserSchema(BaseModel):
         orm_mode = True
 
 class UserSchemaCreate(BaseModel):
+<<<<<<< HEAD
     #active: bool
+=======
+>>>>>>> 14a6389a6fac9a1e790607f477e4d5a598d87c2e
     age: int
     name: str=Field
     gender: str
