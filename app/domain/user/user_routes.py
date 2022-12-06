@@ -28,4 +28,5 @@ def get_user(id: int, db: Session = Depends(get_db)):
             summary="Operação responsável por criar um novo usuário.",
             response_model=UserSchema)
 def create_user(body: UserSchemaCreate, db: Session = Depends(get_db)):
-    return user_service.create(db, body)
+    print(body)
+    # return user_service.create(db, body)
