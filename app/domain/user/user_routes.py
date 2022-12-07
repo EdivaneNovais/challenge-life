@@ -29,4 +29,4 @@ def get_user(id: int, db: Session = Depends(get_db)):
             response_model=UserSchema)
 def create_user(body: UserSchemaCreate, db: Session = Depends(get_db)):
     print(body)
-    # return user_service.create(db, body)
+    return user_service.create(db, body)
