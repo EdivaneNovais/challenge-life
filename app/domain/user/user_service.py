@@ -18,4 +18,9 @@ def validates_age(age: int):
     if age >= 18:
         return True
     return False
+
+def validates_email(db: Session, email: str):
+    return UserRepository().filter_by_email(db, User, email)
+
+
     

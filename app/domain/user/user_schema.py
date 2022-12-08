@@ -4,7 +4,7 @@ from pydantic import BaseModel, Field
 
 class UserSchema(BaseModel):
     id: int
-    active: Optional[bool]
+    active: Optional[bool] 
     age: int
     name: str=Field(..., example="Maria")
     gender: str

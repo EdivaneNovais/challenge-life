@@ -14,8 +14,6 @@ cursor_obj = connect.cursor()
 
 # QUERY BANCO DE DADOS 
 
-#cursor_obj.execute("DROP TABLE IF EXISTS users")
-
 tabela_users = """CREATE TABLE users (
     ID INTEGER PRIMARY KEY AUTOINCREMENT,
     ACTIVE BOOLEAN, 
@@ -26,8 +24,6 @@ tabela_users = """CREATE TABLE users (
     created_at VARCHAR NOT NULL, 
     updated_at VARCHAR NOT NULL
 );"""
-
-#cursor_obj.execute(tabela_users)
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

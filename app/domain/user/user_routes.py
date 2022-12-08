@@ -30,7 +30,16 @@ def get_user(id: int, db: Session = Depends(get_db)):
 def create_user(body: UserSchemaCreate, db: Session = Depends(get_db)):
     print(body)
      
+    validation_email = user_service.validates_email(db, body.email)
     validation_age = user_service.validates_age(body.age)
-    if validation_age:
-        return user_service.create(db, body)
+    
+    if validation_age == True:
+        if validation_email == []:
+            return user_service.create(db, body)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='ESTE E-MAIL JÁ EXISTE')
     raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='VOCÊ PRECISA TER IDADE MAIOR QUE 18 ANOS')
+
+# @router.put("/api/v1/users{id}",
+#             summary="Operação responsável por atualizar um usuário.",
+#             response_model=UserSchema)
+# def update_user(id: int, body: UserSchema, db: Session = Depends(get_db)):

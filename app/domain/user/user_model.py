@@ -6,7 +6,7 @@ class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True)
-    active = Column(Boolean)
+    active = Column(Boolean, default=True)
     age = Column(Integer)
     name = Column(String, nullable=False)
     gender = Column(String, nullable=False)
