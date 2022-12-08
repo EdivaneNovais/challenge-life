@@ -13,3 +13,9 @@ def get_users(db: Session) -> UserSchema:
 
 def get_user(db: Session, id: int) -> UserSchema:
     return UserRepository().filter_by_id(db, User, id)
+
+def validates_age(age: int):
+    if age >= 18:
+        return True
+    return False
+    

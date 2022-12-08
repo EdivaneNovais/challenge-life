@@ -18,7 +18,7 @@ router = APIRouter()
 def get_users(db: Session = Depends(get_db)):
     return user_service.get_users(db)
 
-@router.get("/api/v1/users{id}", 
+@router.get("/api/v1/users/{id}", 
             summary="Operação responsável por retornar um usuário.",
             response_model=List[UserSchema])
 def get_user(id: int, db: Session = Depends(get_db)):
@@ -29,4 +29,8 @@ def get_user(id: int, db: Session = Depends(get_db)):
             response_model=UserSchema)
 def create_user(body: UserSchemaCreate, db: Session = Depends(get_db)):
     print(body)
-    return user_service.create(db, body)
+     
+    validation_age = user_service.validates_age(body.age)
+    if validation_age:
+        return user_service.create(db, body)
+    raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='VOCÊ PRECISA TER IDADE MAIOR QUE 18 ANOS')
