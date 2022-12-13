@@ -6,7 +6,7 @@ from fastapi import HTTPException, status
 from sqlalchemy.orm.session import Session
 
 from domain.user import user_service
-from domain.user.user_schema import UserSchema, UserSchemaCreate
+from domain.user.user_schema import UserSchema, UserSchemaCreate, UserSchemaUpdate
 
 
 router = APIRouter()
@@ -39,7 +39,9 @@ def create_user(body: UserSchemaCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='ESTE E-MAIL JÁ EXISTE')
     raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='VOCÊ PRECISA TER IDADE MAIOR QUE 18 ANOS')
 
-# @router.put("/api/v1/users{id}",
-#             summary="Operação responsável por atualizar um usuário.",
-#             response_model=UserSchema)
-# def update_user(id: int, body: UserSchema, db: Session = Depends(get_db)):
+@router.put("/api/v1/users/{id}",
+            summary="Operação responsável por atualizar um usuário.",
+            response_model=UserSchema)
+def update_user(id: int, body:UserSchemaUpdate, db: Session = Depends(get_db)):
+    user_service.update_user(db, id, body)
+    return "Usuário atualizado!"

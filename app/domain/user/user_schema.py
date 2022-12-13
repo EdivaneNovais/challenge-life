@@ -21,5 +21,15 @@ class UserSchemaCreate(BaseModel):
 
     class Config:
         orm_mode = True
+        
+class UserSchemaUpdate(BaseModel):
+    age: int
+    name: str
+    gender: str
+    email: str
+
+    class Config:
+        orm_mode = True
+        
 
   

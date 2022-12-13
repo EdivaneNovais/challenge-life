@@ -1,5 +1,3 @@
-from ast import Return
-from pyexpat import model
 from typing import Any
 from sqlalchemy.orm.session import Session
 
@@ -19,5 +17,9 @@ class BaseRepository():
     def filter_by_email(self, db: Session, cls, email: str) -> Any:
         return db.query(cls).filter(cls.email == email).all()
     
-    def update_filter_by_id(self, db: Session, cls, id: int) -> Any:
-        return db.query(cls).filter(cls.id == id).first()
+    def update_filter_by_id(self, db: Session, cls, id: int, body) -> Any: 
+        import pdb;pdb.set_trace()
+        user_obj = db.query(cls).filter(cls.id == id)
+        user_obj.update(dict(body))
+        db.commit()
+        return 'Usuário atualizado!'
