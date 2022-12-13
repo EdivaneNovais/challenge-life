@@ -18,8 +18,6 @@ class BaseRepository():
         return db.query(cls).filter(cls.email == email).all()
     
     def update_filter_by_id(self, db: Session, cls, id: int, body) -> Any: 
-        import pdb;pdb.set_trace()
         user_obj = db.query(cls).filter(cls.id == id)
         user_obj.update(dict(body))
         db.commit()
-        return 'Usuário atualizado!'

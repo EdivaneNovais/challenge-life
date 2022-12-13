@@ -22,6 +22,6 @@ def validates_age(age: int):
 def validates_email(db: Session, email: str):
     return UserRepository().filter_by_email(db, User, email)
 
-def update_user(db: Session, id: int, body) -> UserSchema:
+def update_user(db: Session, id: int, body) -> UserSchemaUpdate:
     user = UserSchemaUpdate(**body.dict())
     return UserRepository().update_filter_by_id(db, User, id, user)

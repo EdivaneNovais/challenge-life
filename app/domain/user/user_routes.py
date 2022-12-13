@@ -43,5 +43,5 @@ def create_user(body: UserSchemaCreate, db: Session = Depends(get_db)):
             summary="Operação responsável por atualizar um usuário.",
             response_model=UserSchema)
 def update_user(id: int, body:UserSchemaUpdate, db: Session = Depends(get_db)):
-    user_service.update_user(db, id, body)
-    return "Usuário atualizado!"
+    return user_service.update_user(db, id, body)
+    
