@@ -13,6 +13,8 @@ connect = sqlite3.connect("mydatabase.db")
 cursor_obj = connect.cursor()
 
 # QUERY BANCO DE DADOS 
+# cursor_obj.execute("DROP TABLE IF EXISTS users")
+# cursor_obj.execute("DROP TABLE IF EXISTS events")
 
 tabela_users = """CREATE TABLE users (
     ID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -24,6 +26,28 @@ tabela_users = """CREATE TABLE users (
     created_at VARCHAR NOT NULL, 
     updated_at VARCHAR NOT NULL
 );"""
+
+tabela_events = """CREATE TABLE events (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    NAME VARCHAR NOT NULL,
+    DESCRIPTION VARCHAR NOT NULL,
+    START DATETIME NOT NULL,
+    END DATETIME NOT NULL,
+    ONLINE_EVENT BOOLEAN,
+    LOCATION_ADDRES VARCHAR NOT NULL,
+    ORGANIZER_EMAIL VARCHAR NOT NULL,
+    STATUS VARCHAR,
+    CAPACITY INTEGER NOT NULL,
+    created_at VARCHAR NOT NULL, 
+    updated_at VARCHAR NOT NULL,
+    USER_ID INTEGER,
+    CONSTRAINT fk_user_event FOREIGN KEY (ID) REFERENCES users (ID)
+);"""
+    
+# cursor_obj.execute(tabela_users)
+# cursor_obj.execute(tabela_events)
+
+
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

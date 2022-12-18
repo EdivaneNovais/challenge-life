@@ -12,7 +12,7 @@ class EventSchema(BaseModel):
     online_event: Optional[bool] 
     location_addres: str 
     organizer_email: str 
-    status: str 
+    status: Optional[str] 
     capacity: int 
     user: Optional[UserSchema] 
     
@@ -24,6 +24,7 @@ class EventSchemaCreate(BaseModel):
     description: str=Field(..., example="meetup dev conf")
     start: datetime
     end: datetime
+    online_event: Optional[bool] 
     location_addres: str
     organizer_email: str 
     capacity: int 
