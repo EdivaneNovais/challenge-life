@@ -34,7 +34,7 @@ tabela_events = """CREATE TABLE events (
     START DATETIME NOT NULL,
     END DATETIME NOT NULL,
     ONLINE_EVENT BOOLEAN,
-    LOCATION_ADDRES VARCHAR NOT NULL,
+    LOCATION_ADDRESS VARCHAR NOT NULL,
     ORGANIZER_EMAIL VARCHAR NOT NULL,
     STATUS VARCHAR,
     CAPACITY INTEGER NOT NULL,
@@ -46,8 +46,6 @@ tabela_events = """CREATE TABLE events (
     
 # cursor_obj.execute(tabela_users)
 # cursor_obj.execute(tabela_events)
-
-
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

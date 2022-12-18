@@ -12,7 +12,7 @@ class Event(Base):
     start = Column(String, nullable=False)
     end = Column(String, nullable=False)
     online_event = Column(Boolean, default=True)
-    location_addres = Column(String, nullable=False)
+    location_address = Column(String, nullable=False)
     organizer_email = Column(String, nullable=False)
     status = Column(String, nullable=False)
     capacity = Column(Integer, nullable=False)
