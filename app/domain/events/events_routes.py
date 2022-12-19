@@ -8,7 +8,7 @@ from sqlalchemy.orm.session import Session
 from domain.events import events_service
 from domain.events.events_schema import EventSchema, EventSchemaCreate, EventSchemaUpdate
 
-router = APIRouter()
+router = APIRouter() 
 
 @router.post("/api/v1/event",
              summary="Operação responsável por criar um evento.",

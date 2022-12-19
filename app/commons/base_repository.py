@@ -21,3 +21,5 @@ class BaseRepository():
         user_obj = db.query(cls).filter(cls.id == id)
         user_obj.update(dict(body))
         db.commit()
+        
+   
