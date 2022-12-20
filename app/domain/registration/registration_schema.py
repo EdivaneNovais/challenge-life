@@ -13,8 +13,7 @@ class RegistrationSchemaCreate(BaseModel):
     registration_status: str=Field(..., example="RESERVED")
     
 class RegistrationSchemaUpdate(BaseModel):
-    email: str
-    registration_status: str
+    registration_status: str=Field(..., example="CANCELED")
     
     class Config:
         orm_mode = True
