@@ -24,7 +24,13 @@ def create(event_id: int, email: str, db: Session, body: RegistrationSchemaCreat
     
     validation_email = validates_email(db, body.email)
     if validation_email is None:
-        return RegistrationRepository().create(db, registration)
+        validation_capacity = RegistrationRepository().get_capacity(db, Event, event_id)
+        if validation_capacity.capacity == 0:
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='EVENTO LOTADO')
+        else:
+            capacity = validation_capacity.capacity - 1
+            RegistrationRepository().update_capacity(db, Event, event_id, capacity)
+            return RegistrationRepository().create(db, registration)
     raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='ESTE E-MAIL JÁ EXISTE')
 
 def get_registration(db: Session, id: int, email: str) -> RegistrationSchema:

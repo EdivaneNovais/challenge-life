@@ -25,4 +25,14 @@ class BaseRepository():
         user_obj.update(dict(body))
         db.commit()
         
+    def get_capacity(self, db: Session, cls, id_event: int):
+        return db.query(cls).filter(cls.id == id_event).first()
+    
+    def update_capacity(self, db: Session, cls, id_event: int, capacity: int):
+        db.query(cls).filter(cls.id == id_event).update({
+            cls.capacity: capacity
+        })
+        db.commit
+        
+        
    
