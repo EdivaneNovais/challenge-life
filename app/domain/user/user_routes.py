@@ -34,7 +34,7 @@ def create_user(body: UserSchemaCreate, db: Session = Depends(get_db)):
     validation_age = user_service.validates_age(body.age)
     
     if validation_age == True:
-        if validation_email == []:
+        if validation_email is None:
             return user_service.create(db, body)
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='ESTE E-MAIL JÁ EXISTE')
     raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='VOCÊ PRECISA TER  IDADE MAIOR QUE 18 ANOS')

@@ -2,7 +2,6 @@ from typing import List
 from fastapi import Depends
 from config.database import get_db
 from fastapi.routing import APIRouter
-from fastapi import HTTPException, status
 from sqlalchemy.orm.session import Session
 
 from domain.events import events_service

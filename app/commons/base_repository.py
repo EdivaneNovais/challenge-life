@@ -15,7 +15,7 @@ class BaseRepository():
         return db.query(cls).filter(cls.id == id).all()
     
     def filter_by_email(self, db: Session, cls, email: str) -> Any:
-        return db.query(cls).filter(cls.email == email).all()
+        return db.query(cls).filter(cls.email == email).first()
     
     def update_filter_by_id(self, db: Session, cls, id: int, body) -> Any: 
         user_obj = db.query(cls).filter(cls.id == id)

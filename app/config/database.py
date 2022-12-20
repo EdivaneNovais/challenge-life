@@ -1,10 +1,10 @@
 import os
 import sqlite3
 from datetime import datetime
-from sqlalchemy import Column, column
+from sqlalchemy import Column
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.sql.sqltypes import DateTime, Integer
+from sqlalchemy.sql.sqltypes import DateTime
 from sqlalchemy.ext.declarative import declared_attr, declarative_base
 
 SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///mydatabase.db")
@@ -15,8 +15,10 @@ cursor_obj = connect.cursor()
 # QUERY BANCO DE DADOS 
 # cursor_obj.execute("DROP TABLE IF EXISTS users")
 # cursor_obj.execute("DROP TABLE IF EXISTS events")
+# cursor_obj.execute("DROP TABLE IF EXISTS registrations")
 
-tabela_users = """CREATE TABLE users (
+
+table_users = """CREATE TABLE users (
     ID INTEGER PRIMARY KEY AUTOINCREMENT,
     ACTIVE BOOLEAN, 
     AGE INTEGER NOT NULL, 
@@ -27,7 +29,7 @@ tabela_users = """CREATE TABLE users (
     updated_at VARCHAR NOT NULL
 );"""
 
-tabela_events = """CREATE TABLE events (
+table_events = """CREATE TABLE events (
     ID INTEGER PRIMARY KEY AUTOINCREMENT,
     NAME VARCHAR NOT NULL,
     DESCRIPTION VARCHAR NOT NULL,
@@ -39,13 +41,23 @@ tabela_events = """CREATE TABLE events (
     STATUS VARCHAR,
     CAPACITY INTEGER NOT NULL,
     created_at VARCHAR NOT NULL, 
-    updated_at VARCHAR NOT NULL,
-    USER_ID INTEGER,
-    CONSTRAINT fk_user_event FOREIGN KEY (ID) REFERENCES users (ID)
+    updated_at VARCHAR NOT NULL
 );"""
+
+table_registration =  """CREATE TABLE registrations (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    EMAIL VARCHAR NOT NULL,
+    REGISTRATION_STATUS VARCHAR NOT NULL,
+    EVENT_ID INTEGER,
+    created_at VARCHAR NOT NULL, 
+    updated_at VARCHAR NOT NULL,
+    CONSTRAINT fk_event FOREIGN KEY (ID) REFERENCES events (ID)
+);"""
+
     
-# cursor_obj.execute(tabela_users)
-# cursor_obj.execute(tabela_events)
+# cursor_obj.execute(table_users)
+# cursor_obj.execute(table_events)
+# cursor_obj.execute(table_registration)
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

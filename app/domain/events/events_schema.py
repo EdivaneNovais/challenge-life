@@ -1,7 +1,6 @@
 from datetime import datetime
 from typing import Optional
 from pydantic import BaseModel, Field
-from domain.user.user_schema import UserSchema
 
 class EventSchema(BaseModel):
     id: int
@@ -14,7 +13,6 @@ class EventSchema(BaseModel):
     organizer_email: str 
     status: Optional[str] 
     capacity: int 
-    user: Optional[UserSchema] 
     
     class Config:
         orm_mode = True
@@ -28,7 +26,6 @@ class EventSchemaCreate(BaseModel):
     location_address: str
     organizer_email: str 
     capacity: int 
-    user_id: int=Field(..., example=2)
     
 class EventSchemaUpdate(BaseModel):
     name: str
