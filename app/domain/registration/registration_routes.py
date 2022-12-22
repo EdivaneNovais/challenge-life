@@ -11,7 +11,7 @@ from domain.registration.registration_schema import RegistrationSchema, Registra
 router = APIRouter()
 
 @router.post("/api/v1/event/{event_id}/registration",
-             summary="Operação responsável por criar o cadastro de um evento.",
+             summary="Operação responsável por cadastrar um usúario no evento.",
              response_model=RegistrationSchema)
 def create_registration(event_id: int, body: RegistrationSchemaCreate, db: Session = Depends(get_db)):
     return registration_service.create(event_id, body.email, db, body)
