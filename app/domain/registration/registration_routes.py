@@ -10,19 +10,19 @@ from domain.registration.registration_schema import RegistrationSchema, Registra
 
 router = APIRouter()
 
-@router.post("/api/v1/event/{event_id}/registration",
+@router.post("/event/{event_id}/registration",
              summary="Operação responsável por cadastrar um usúario no evento.",
              response_model=RegistrationSchema)
 def create_registration(event_id: int, body: RegistrationSchemaCreate, db: Session = Depends(get_db)):
     return registration_service.create(event_id, body.email, db, body)
    
-@router.get("/api/v1/event/{event_id}/registration/{email}",
+@router.get("/event/{event_id}/registration/{email}",
             summary="Operação responsável por recuperar o status de um evento",
             response_model=List[RegistrationSchema])
 def get_registration(id: int, email: str, db: Session = Depends(get_db)):
     return registration_service.get_registration(db, id, email)
             
-@router.patch("/api/v1/event/{event_id}/registration/{email}",
+@router.patch("/event/{event_id}/registration/{email}",
               summary="Operação responsável por mudar o status de um evento",
               response_model=RegistrationSchema)
 def update_registration(id: int, email: str, body: RegistrationSchemaUpdate, db: Session = Depends(get_db)):
